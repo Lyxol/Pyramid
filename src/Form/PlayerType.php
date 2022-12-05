@@ -15,6 +15,7 @@ class PlayerType extends AbstractType
     {
         $builder
             ->add('name',TextType::class)
+            ->add('password',TextType::class)
             ->add('score',NumberType::class)
         ;
     }
