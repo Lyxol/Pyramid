@@ -10,9 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+#[Route('/player')]
 class PlayerController extends AbstractController
 {
-    #[Route('/player', name: 'app_player')]
+    #[Route('/', name: 'app_player')]
     public function index(PlayerRepository $playerRepository): Response
     {
         return $this->render('player/index.html.twig', [
