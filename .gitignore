@@ -43,5 +43,6 @@
 /.web-server-pid
 
 #other
+/.env.local
 /.idea
 /.vscode
