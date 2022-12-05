@@ -22,6 +22,9 @@ class Pyramid
     #[ORM\Column(length: 255)]
     private ?string $author = null;
 
+    #[ORM\Column]
+    private ?int $base = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Pyramid
     public function setAuthor(string $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getBase(): ?int
+    {
+        return $this->base;
+    }
+
+    public function setBase(int $base): self
+    {
+        $this->base = $base;
 
         return $this;
     }
