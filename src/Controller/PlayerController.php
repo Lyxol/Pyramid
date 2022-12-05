@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Player;
+use App\Form\PlayerType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class PlayerController extends AbstractController
 {
@@ -17,10 +20,16 @@ class PlayerController extends AbstractController
     }
 
     #[Route('/player/form')]
-    public function _form(): Response
+    public function _form(Request $request): Response
     {
+        $player = new Player();
+        $form = $this->createForm(PlayerType::class, $player);
+        if($form->isSubmitted() && $form->isValid()){
+            $player = $form->getData();
+            return $this->redirectToRoute('/player');
+        }
         return $this->render('player/_Form.html.twig',[
-            'controller_name' => 'PlayerController',
+            'form' => $form
         ]);
     }
 
