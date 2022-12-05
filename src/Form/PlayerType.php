@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Player;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,8 +15,8 @@ class PlayerType extends AbstractType
     {
         $builder
             ->add('name',TextType::class)
+            ->add('email',EmailType::class)
             ->add('password',TextType::class)
-            ->add('score',NumberType::class)
         ;
     }
 
