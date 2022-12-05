@@ -20,7 +20,7 @@ class PlayerController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_player_new', methods:['GET'])]
+    #[Route('/new', name: 'app_player_new')]
     public function new(Request $request,PlayerRepository $playerRepository): Response
     {
         $player = new Player();
@@ -37,7 +37,7 @@ class PlayerController extends AbstractController
         ]);
     }
 
-    #[Route('/edit',name: 'app_player_edit', methods:['GET'])]
+    #[Route('/edit',name: 'app_player_edit')]
     public function edit(Request $request,PlayerRepository $playerRepository)
     {
         $player = new Player();
