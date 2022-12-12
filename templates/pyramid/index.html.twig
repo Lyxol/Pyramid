@@ -6,6 +6,9 @@
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    #test {
+        background-image: url("public/images/tapis_vert.png");
+    }
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -33,13 +36,22 @@
         </div>
     </nav>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h2>Menu Pyramid </h2>
+            </div>
+            <div class="col-sm-9">
+                <div style="background-image: url('https://m.media-amazon.com/images/I/41nFEeylXSL._AC_.jpg'); height: 288px; width: 424px">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/corbi/Documents/Projet/Web/Scolaire/PHP/Pyramid/src/Controller/PyramidController.php'|file_link(0) }}">src/Controller/PyramidController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/corbi/Documents/Projet/Web/Scolaire/PHP/Pyramid/templates/pyramid/index.html.twig'|file_link(0) }}">templates/pyramid/index.html.twig</a></code></li>
-    </ul>
-</div>
+                </div>
+                <div style='background-image: url("/public/images/tapis_vert.png");height: 288px; width: 424px'>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
+
