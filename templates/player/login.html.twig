@@ -4,13 +4,14 @@
 
 {% block body %}
 
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData,'security') }}</div>
+{% endif %}
     <h1>Log-in</h1>
 
     {{ form_start(loginForm) }}
         {{ form_row(loginForm.email) }}
-        {{ form_row(loginForm.plainPassword, {
-            label: 'Password'
-        }) }}
+        {{ form_row(loginForm.password) }}
 
         <button type="submit" class="btn">Login</button>
         <a href="/register">Sign-up</a>

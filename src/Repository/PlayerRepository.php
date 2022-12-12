@@ -53,6 +53,15 @@ class PlayerRepository extends ServiceEntityRepository implements PasswordUpgrad
         $this->save($user, true);
     }
 
+    public function loadUserByEmail(string $email,string $password){
+        return $this->createQueryBuilder('u')
+            ->where('u.email = :username AND u.password = :password')
+            ->setParameter('email', $email)
+            ->setParameter('password', $password)
+            ->getQuery()
+            ->getOneOrNullResult(); 
+    }
+
 //    /**
 //     * @return Player[] Returns an array of Player objects
 //     */
