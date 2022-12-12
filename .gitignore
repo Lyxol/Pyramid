@@ -46,4 +46,10 @@
 /.env.local
 /.idea
 /.vscode
-/node_modules
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+/public/build
+###< symfony/webpack-encore-bundle ###
