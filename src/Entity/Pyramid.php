@@ -13,9 +13,6 @@ class Pyramid
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $cardPlayed = null;
-
     #[ORM\Column(length: 255)]
     private ?string $player = null;
 
@@ -28,18 +25,6 @@ class Pyramid
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCardPlayed(): ?string
-    {
-        return $this->cardPlayed;
-    }
-
-    public function setCardPlayed(?string $cardPlayed): self
-    {
-        $this->cardPlayed = $cardPlayed;
-
-        return $this;
     }
 
     public function getPlayer(): ?string
