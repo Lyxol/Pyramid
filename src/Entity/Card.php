@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CardRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CardRepository::class)]
@@ -21,6 +22,9 @@ class Card
 
     #[ORM\Column(length: 255)]
     private ?string $value = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $position = [];
 
     public function getId(): ?int
     {
@@ -59,6 +63,18 @@ class Card
     public function setValue(string $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function getPosition(): array
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?array $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }
