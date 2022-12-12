@@ -62,6 +62,18 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    #[Route('/login', name: 'app_login')]
+    public function login(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new Player();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+        
+        return $this->render('registration/login.html.twig', [
+            'loginForm' => $form->createView(),
+        ]);
+    }
+
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
