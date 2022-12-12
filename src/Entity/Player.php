@@ -71,8 +71,8 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        // guarantee every user at least has ROLE_PLAYER
+        $roles[] = 'ROLE_PLAYER';
 
         return array_unique($roles);
     }
