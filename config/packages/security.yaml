@@ -18,8 +18,8 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                        login_path: app_player_login
-                        check_path: app_player_login
+                        login_path: app_auth_login
+                        check_path: app_auth_login
                         username_parameter: login[email]
                         password_parameter: login[password]
                         default_target_path: /pyramid

@@ -10,10 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-#[Route('/player')]
 class PlayerController extends AbstractController
 {
-    #[Route('/', name: 'app_player')]
+    #[Route('/player', name: 'app_player')]
     public function index(): Response
     {
         return $this->render('player/index.html.twig', [
@@ -21,7 +20,7 @@ class PlayerController extends AbstractController
         ]);
     }
 
-    #[Route('/login', name: 'app_player_login')]
+    #[Route('/auth/login', name: 'app_auth_login')]
     public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         $user = new Player();
