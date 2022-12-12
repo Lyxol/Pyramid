@@ -40,12 +40,41 @@ class CardController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_card_show', methods: ['GET'])]
-    public function show(Card $card): Response
+    #[Route('/generate', name: 'app_card_generate', methods: ['GET'])]
+    public function generate(): Response
     {
-        return $this->render('card/show.html.twig', [
-            'card' => $card,
-        ]);
+        $card = new Card();
+        $cardRepository = new CardRepository();
+        $id = 0;
+
+        for ($i = 0; $i < 4; $i++) {
+            for ($j = 0; $j < 13; $j++) {
+                if ($i = 0) {
+                    $card->setColor("Piques");
+                    $card->setValue($j);
+                    $card->setPosition(null);
+
+                }
+                if ($i = 1) {
+                    $card->setColor("Coeur");
+                    $card->setValue($j);
+                    $card->setPosition(null);
+			}
+                if ($i = 2) {
+                    $card->setColor("Carreau");
+                    $card->setValue($j);
+                    $card->setPosition(null);
+			}
+                if ($i = 3) {
+                    $card->setColor("Trefle");
+                    $card->setValue($j);
+                    $card->setPosition(null);
+			}
+                $id++;
+            }
+            $cardRepository->save($card);
+        }
+        $cardRepository->save($card,true);
     }
 
     #[Route('/{id}/edit', name: 'app_card_edit', methods: ['GET', 'POST'])]
