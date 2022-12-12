@@ -31,11 +31,6 @@ class Card
         return $this->id;
     }
 
-    public function getGameID(): ?string
-    {
-        return $this->gameID;
-    }
-
     public function setGameID(string $gameID): self
     {
         $this->gameID = $gameID;
