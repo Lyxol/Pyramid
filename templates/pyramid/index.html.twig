@@ -1,19 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PyramidController!{% endblock %}
+{% block title %}Tipsy Pyramid - Play!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    #test {
-        background-image: url("public/images/tapis_vert.png");
-    }
-</style>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<main>
+    <div class="row">
+                <div class="col-sm-2">
+                <h2>Menu Pyramid </h2>
+            </div>
+            <div class="col-sm-10">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Pyramid</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -35,23 +32,10 @@
             </div>
         </div>
     </nav>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3">
-                <h2>Menu Pyramid </h2>
+            <table>
+            </table>
             </div>
-            <div class="col-sm-9">
-                <div style="background-image: url('https://m.media-amazon.com/images/I/41nFEeylXSL._AC_.jpg'); height: 288px; width: 424px">
-
-                </div>
-                <div style='background-image: url("/public/images/tapis_vert.png");height: 288px; width: 424px'>
-
-                </div>
-
-            </div>
-        </div>
     </div>
-
+</main>
 {% endblock %}
 
