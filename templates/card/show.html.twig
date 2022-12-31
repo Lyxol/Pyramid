@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Card{% endblock %}
+
+{% block body %}
+    <h1>Card</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ card.id }}</td>
+            </tr>
+            <tr>
+                <th>GameID</th>
+                <td>{{ card.gameID }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ card.color }}</td>
+            </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ card.value }}</td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td>{{ card.position ? card.position|join(', ') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_card_index') }}">back to list</a>
+
+    <a href="{{ path('app_card_edit', {'id': card.id}) }}">edit</a>
+
+    {{ include('card/_delete_form.html.twig') }}
+{% endblock %}

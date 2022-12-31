@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PyramidController!{% endblock %}
+{% block title %}Tipsy Pyramid - Play!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<main>
+    <div class="row">
+                <div class="col-sm-2">
+                <h2>Menu Pyramid </h2>
+            </div>
+            <div class="col-sm-10">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Pyramid</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,14 +29,10 @@
             </div>
         </div>
     </nav>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/corbi/Documents/Projet/Web/Scolaire/PHP/Pyramid/src/Controller/PyramidController.php'|file_link(0) }}">src/Controller/PyramidController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/corbi/Documents/Projet/Web/Scolaire/PHP/Pyramid/templates/pyramid/index.html.twig'|file_link(0) }}">templates/pyramid/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <table>
+            </table>
+            </div>
+    </div>
+</main>
 {% endblock %}
+
