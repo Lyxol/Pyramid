@@ -5,9 +5,11 @@
 {% block body %}
 <main>
     <div class="row">
-                <div class="col-sm-2" style="background:black;color:white;min-height:100vh;">
-                <h2>Menu Pyramid </h2>
+            <div class="col-sm-2 text-center" style="background:black;color:white;min-height:100vh;">
+                <h2 class="text-center" >Tipsy Pyramid</h2>
+                <a class="btn btn-secondary" href="./new">Create new Pyramid</a>
             </div>
+            
             <div class="col-sm-10">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -24,12 +26,13 @@
                     </li>
                 </ul>
                 <span class="navbar-text">
-        Nom d'utilisateur
+        {{ username }}
       </span>
             </div>
         </div>
     </nav>
             <table>
+
             </table>
             </div>
     </div>

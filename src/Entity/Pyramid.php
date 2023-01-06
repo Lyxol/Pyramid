@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PyramidRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PyramidRepository::class)]
@@ -14,29 +15,20 @@ class Pyramid
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $player = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $author = null;
 
     #[ORM\Column]
     private ?int $base = null;
 
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $Players = [];
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPlayer(): ?string
-    {
-        return $this->player;
-    }
-
-    public function setPlayer(string $player): self
-    {
-        $this->player = $player;
-
-        return $this;
     }
 
     public function getAuthor(): ?string
@@ -59,6 +51,30 @@ class Pyramid
     public function setBase(int $base): self
     {
         $this->base = $base;
+
+        return $this;
+    }
+
+    public function getPlayers(): array
+    {
+        return $this->Players;
+    }
+
+    public function setPlayers(?array $Players): self
+    {
+        $this->Players = $Players;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

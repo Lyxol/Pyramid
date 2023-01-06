@@ -14,8 +14,8 @@ class PyramidType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('author',TextType::class)
-            ->add('base',NumberType::class)
+            ->add('Name',TextType::class)
+            ->add('Base',NumberType::class)
         ;
     }
 

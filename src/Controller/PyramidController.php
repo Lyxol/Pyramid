@@ -15,9 +15,13 @@ class PyramidController extends AbstractController
 {
     #[Route('/', name: 'app_pyramid')]
     public function index(PyramidRepository $pyramidRepository): Response
-    {
+    { 
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+
         return $this->render('pyramid/index.html.twig', [
-            'controller_name' => 'PyramidController',
+            'username' => $user->getEmail(),
+            'pyramud' => "TODO"
         ]);
     }
     #[Route('/new', name: 'app_pyramid_new')]
@@ -28,8 +32,9 @@ class PyramidController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $pyramid = $form->getData();
+            $pyramid->setAuthor($this->getUser()->getEmail());
             $pyramidRepository->save($pyramid,true);
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('app_pyramid');
         }
         return $this->render('pyramid/new.html.twig',[
             'form' => $form->createView(),
@@ -45,6 +50,7 @@ class PyramidController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $pyramid = $form->getData();
+            $pyramid->setAuthor($this->getUser()->getEmail());
             $pyramidRepository->save($pyramid,true);
             return $this->redirectToRoute('/');
         }
