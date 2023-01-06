@@ -39,6 +39,24 @@ class PyramidRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByAuthor($author):array
+    {
+        return $this->createQueryBuilder('p')
+                    ->andWhere('p.author = :val')
+                    ->setParameter('val',$author)
+                    ->orderBy('p.name','ASC')
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function findById($Id):array
+    {
+        return $this->createQueryBuilder('p')
+                    ->andWhere('p.id = :val')
+                    ->setParameter('val',$Id)
+                    ->getQuery()
+                    ->getResult();
+    }
 //    /**
 //     * @return Pyramid[] Returns an array of Pyramid objects
 //     */
