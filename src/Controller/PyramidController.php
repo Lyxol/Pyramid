@@ -19,14 +19,16 @@ class PyramidController extends AbstractController
         $id = $request->query->get('id');
         if (!is_null($id)) {
             $currentPyramid = $pyramidRepository->findById($id);
-            $currentPyramid = $currentPyramid[0];
             $PyramidTab = [];
             if (!empty($currentPyramid)) {
+                $currentPyramid = $currentPyramid[0];
                 $PyramidRow = [];
                 $count = 1;
+                $fake_value = 0;
                 for ($i = 0; $i < $currentPyramid->getBase(); $i++) {
                     for ($j = 0; $j < $count; $j++) {
-                        $PyramidRow[] = "*";
+                        $PyramidRow[] = $fake_value;
+                        $fake_value++;
                     }
                     $PyramidTab[] = $PyramidRow;
                     $PyramidRow = [];
@@ -66,7 +68,7 @@ class PyramidController extends AbstractController
     }
 
     #[Route('/edit', name: 'app_pyramid_edit')]
-    public function edit(Request $request, PyramidRepository $pyramidRepository)
+    public function edit(Request $request, PyramidRepository $pyramidRepository): Response
     {
         $pyramid = new Pyramid();
         $form = $this->createForm(PyramidType::class, $pyramid);
