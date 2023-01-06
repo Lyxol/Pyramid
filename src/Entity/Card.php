@@ -15,9 +15,6 @@ class Card
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $gameID = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $color = null;
 
     #[ORM\Column(length: 255)]
@@ -29,13 +26,6 @@ class Card
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setGameID(string $gameID): self
-    {
-        $this->gameID = $gameID;
-
-        return $this;
     }
 
     public function getColor(): ?string

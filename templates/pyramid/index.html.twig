@@ -1,41 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tipsy Pyramid - Play!{% endblock %}
-
-{% block body %}
-<main>
-    <div class="row">
-            <div class="col-sm-2 text-center" style="background:black;color:white;min-height:100vh;">
-                <h2 class="text-center" >Tipsy Pyramid</h2>
-                <a class="btn btn-secondary" href="./new">Create new Pyramid</a>
-            </div>
-            
-            <div class="col-sm-10">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Play</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">log-out</a>
-                    </li>
-                </ul>
-                <span class="navbar-text">
-        {{ username }}
-      </span>
-            </div>
-        </div>
-    </nav>
-            <table>
-
-            </table>
-            </div>
-    </div>
-</main>
+{% block title %}
+  Tipsy Pyramid - Play!
 {% endblock %}
 
+{% block body %}
+  <main>
+    <div class="row">
+      <div class="col-sm-2 text-center text-light"
+        style="background:black;min-height:100vh;">
+        <h1 class="text-center mb-3">
+          Tipsy Pyramid
+        </h1>
+        <a class="btn btn-secondary mb-3" href="./new">Create new Pyramid</a>
+        {% if listPyramid != [] %}
+          <h4>
+            Your Pyramid :
+          </h4>
+          <ul class="list-group">
+            {% for pyramid in listPyramid %}
+              <ol class="list-group-item">
+                <a class="btn btn-secondary"
+                  href="/pyramid?id={{ pyramid.id }}">
+                  {{ pyramid.name }}
+                </a>
+              </ol>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+      <div class="col-sm-10">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <button class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarText"
+              aria-controls="navbarText"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">
+                    Play
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">log-out</a>
+                </li>
+              </ul>
+              <span class="navbar-text">{{ username }}</span>
+            </div>
+          </div>
+        </nav>
+        <table>
+          {% if currentPyramid != null %}
+            <h3 class="text-center">
+              {{ currentPyramid.name }}
+            </h3>
+            {% for row in PyramidTab %}
+              <tr>
+                {% for value in row %}
+                  <td>
+                    <a href="" class="btn btn-primary">{{ value }}</a>
+                  </td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          {% endif %}
+        </table>
+      </div>
+    </div>
+  </main>
+{% endblock %}
