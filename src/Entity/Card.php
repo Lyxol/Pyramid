@@ -26,6 +26,9 @@ class Card
     #[ORM\Column(length: 255)]
     private ?string $img = null;
 
+    #[ORM\ManyToOne(inversedBy: 'cards')]
+    private ?Deck $deck = null;
+
     /**
      * @return string|null
      */
@@ -79,6 +82,18 @@ class Card
     public function setPosition(?array $position): self
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getDeck(): ?Deck
+    {
+        return $this->deck;
+    }
+
+    public function setDeck(?Deck $deck): self
+    {
+        $this->deck = $deck;
 
         return $this;
     }

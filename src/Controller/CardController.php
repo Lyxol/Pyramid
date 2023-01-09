@@ -45,62 +45,6 @@ class CardController extends AbstractController
     public function generate(CardRepository $cardRepository): Response
     {
 
-        $id = 0;
-
-        for ($i = 1; $i <= 4; $i++) {
-            for ($j = 1; $j <= 13; $j++) {
-                $card = new Card();
-                if ($i === 1) {
-                    var_dump('test = 1');
-                    $card->setColor("Piques");
-                    $card->setValue($j);
-                    $card->setPosition([]);
-                    if ($j < 10) {
-                        $card->setImg("P_0". $j. ".jpg");
-                    } else {
-                        $card->setImg("P_" .$j . ".jpg");
-                    }
-                }
-                if ($i === 2) {
-                    var_dump('test = 2');
-                    $card->setColor("Coeur");
-                    $card->setValue($j);
-                    $card->setPosition([]);
-                    if ($j < 10) {
-                        $card->setImg("C_0". $j. ".jpg");
-                    } else {
-                        $card->setImg("C_". $j .".jpg");
-                    }
-                }
-                if ($i === 3) {
-
-                    var_dump('test = 3');
-                    $card->setColor("Carreau");
-                    $card->setValue($j);
-                    $card->setPosition([]);
-                    if ($j < 10) {
-                        $card->setImg("K_0". $j .".jpg");
-                    } else {
-                        $card->setImg("K_". $j . ".jpg");
-                    }
-                }
-                if ($i === 4) {
-                    var_dump('test = 4');
-                    $card->setColor("Trefle");
-                    $card->setValue($j);
-                    $card->setPosition([]);
-                    if ($j < 10) {
-                        $card->setImg("T_0" . $j . ".jpg");
-                    } else {
-                        $card->setImg("T_" . $j . ".jpg");
-                    }
-                }
-                $id++;
-                $cardRepository->save($card);
-            }
-
-        }
-        $cardRepository->save($card, true);
         new JsonResponse(json_encode('true'));
     }
 

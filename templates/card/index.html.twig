@@ -9,7 +9,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>GameID</th>
                 <th>Color</th>
                 <th>Value</th>
                 <th>Position</th>
@@ -20,7 +19,6 @@
         {% for card in cards %}
             <tr>
                 <td>{{ card.id }}</td>
-                <td>{{ card.gameID }}</td>
                 <td>{{ card.color }}</td>
                 <td>{{ card.value }}</td>
                 <td>{{ card.position ? card.position|join(', ') : '' }}</td>
