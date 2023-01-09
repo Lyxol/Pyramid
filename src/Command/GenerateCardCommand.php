@@ -29,47 +29,42 @@ protected function execute(InputInterface $input, OutputInterface $output): int
     for ($i = 1; $i <= 4; $i++) {
         for ($j = 1; $j <= 13; $j++) {
             $card = new Card();
-            if ($i === 1) {
-                $card->setColor("Piques");
-                $card->setValue($j);
-                $card->setPosition([]);
-                if ($j < 10) {
-                    $card->setImg("P_0". $j. ".jpg");
-                } else {
-                    $card->setImg("P_" .$j . ".jpg");
-                }
+            switch ($i) {
+                case 1:
+                    $card->setColor("Piques");
+                    if ($j < 10) {
+                        $card->setImg("P_0". $j . ".jpg");
+                    } else {
+                        $card->setImg("P_" .$j . ".jpg");
+                    }
+                    break;
+                case 2:
+                    $card->setColor("Coeur");
+                    if ($j < 10) {
+                        $card->setImg("C_0". $j . ".jpg");
+                    } else {
+                        $card->setImg("C_" .$j . ".jpg");
+                    }
+                    break;
+                case 3:
+                    $card->setColor("Carreau");
+                    if ($j < 10) {
+                        $card->setImg("K_0". $j . ".jpg");
+                    } else {
+                        $card->setImg("K_" .$j . ".jpg");
+                    }
+                    break;
+                default:
+                    $card->setColor("Trefle");
+                    if ($j < 10) {
+                        $card->setImg("T_0". $j . ".jpg");
+                    } else {
+                        $card->setImg("T_" .$j . ".jpg");
+                    }
+                    break;
             }
-            if ($i === 2) {
-                $card->setColor("Coeur");
-                $card->setValue($j);
-                $card->setPosition([]);
-                if ($j < 10) {
-                    $card->setImg("C_0". $j. ".jpg");
-                } else {
-                    $card->setImg("C_". $j .".jpg");
-                }
-            }
-            if ($i === 3) {
-
-                $card->setColor("Carreau");
-                $card->setValue($j);
-                $card->setPosition([]);
-                if ($j < 10) {
-                    $card->setImg("K_0". $j .".jpg");
-                } else {
-                    $card->setImg("K_". $j . ".jpg");
-                }
-            }
-            if ($i === 4) {
-                $card->setColor("Trefle");
-                $card->setValue($j);
-                $card->setPosition([]);
-                if ($j < 10) {
-                    $card->setImg("T_0" . $j . ".jpg");
-                } else {
-                    $card->setImg("T_" . $j . ".jpg");
-                }
-            }
+            $card->setValue($j);
+            $card->setPosition([]);
             $id++;
             $cardRepository->save($card);
         }

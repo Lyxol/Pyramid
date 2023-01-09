@@ -39,6 +39,16 @@ class CardRepository extends ServiceEntityRepository
         }
     }
 
+    public function findOneById($id):?Card
+    {
+
+        return $this->createQueryBuilder('c')
+                    ->andWhere('c.id = :id')
+                    ->setParameter('id',$id)
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
+
 //    /**
 //     * @return Card[] Returns an array of Card objects
 //     */

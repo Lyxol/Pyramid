@@ -65,8 +65,8 @@
             {% for row in PyramidTab %}
               <tr>
                 {% for value in row %}
-                  <td>
-                    <a href="#"  id="{{value}}" class="btn btn-primary">*</a>
+                  <td class="card-button">
+                    {{ render("/card/#{value}") }}
                   </td>
                 {% endfor %}
               </tr>
