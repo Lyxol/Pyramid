@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CardRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,14 +22,12 @@ class Card
     #[ORM\Column(length: 255)]
     private ?string $value = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $position = [];
-
     #[ORM\Column(length: 255)]
     private ?string $img = null;
 
-    #[ORM\ManyToOne(inversedBy: 'cards')]
-    private ?Deck $deck = null;
+    public function __construct()
+    {
+    }
 
     /**
      * @return string|null
@@ -70,30 +70,6 @@ class Card
     public function setValue(string $value): self
     {
         $this->value = $value;
-
-        return $this;
-    }
-
-    public function getPosition(): array
-    {
-        return $this->position;
-    }
-
-    public function setPosition(?array $position): self
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    public function getDeck(): ?Deck
-    {
-        return $this->deck;
-    }
-
-    public function setDeck(?Deck $deck): self
-    {
-        $this->deck = $deck;
 
         return $this;
     }

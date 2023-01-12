@@ -15,12 +15,12 @@ class Deck
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'deck', targetEntity: Card::class)]
-    private Collection $cards;
-
     #[ORM\OneToOne(inversedBy: 'deck', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Pyramid $pyramid = null;
+
+    #[ORM\ManyToMany(targetEntity: Card::class)]
+    private Collection $cards;
 
     public function __construct()
     {
@@ -31,43 +31,6 @@ class Deck
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection<int, Card>
-     */
-    public function getCards(): Collection
-    {
-        return $this->cards;
-    }
-
-    public function setCards(array $cards): self
-    {
-        $cards = new ArrayCollection($cards);
-        $this->cards = $cards;
-        return $this;
-    }
-
-    public function addCard(Card $card): self
-    {
-        if (!$this->cards->contains($card)) {
-            $this->cards->add($card);
-            $card->setDeck($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCard(Card $card): self
-    {
-        if ($this->cards->removeElement($card)) {
-            // set the owning side to null (unless already changed)
-            if ($card->getDeck() === $this) {
-                $card->setDeck(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getPyramid(): ?Pyramid
@@ -82,4 +45,34 @@ class Deck
         return $this;
     }
 
+    /**
+     * @return Collection<int, Card>
+     */
+    public function getCards(): Collection
+    {
+        return $this->cards;
+    }
+
+    public function addCard(Card $card): self
+    {
+        if (!$this->cards->contains($card)) {
+            $this->cards->add($card);
+        }
+
+        return $this;
+    }
+
+    public function removeCard(Card $card): self
+    {
+        $this->cards->removeElement($card);
+
+        return $this;
+    }
+
+    public function setCards(array $cards): self
+    {
+        $cards = new ArrayCollection($cards);
+        $this->cards = $cards;
+        return $this;
+    }
 }

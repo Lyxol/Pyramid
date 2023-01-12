@@ -39,46 +39,46 @@ class PyramidRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByAuthor($author):array
+    public function findByAuthor($id): array
     {
         return $this->createQueryBuilder('p')
-                    ->andWhere('p.author = :val')
-                    ->setParameter('val',$author)
-                    ->orderBy('p.name','ASC')
-                    ->getQuery()
-                    ->getResult();
+            ->andWhere('p.author = :val')
+            ->setParameter('val', $id)
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
-    public function findById($Id):array
+    public function findById($Id): array
     {
         return $this->createQueryBuilder('p')
-                    ->andWhere('p.id = :val')
-                    ->setParameter('val',$Id)
-                    ->getQuery()
-                    ->getResult();
+            ->andWhere('p.id = :val')
+            ->setParameter('val', $Id)
+            ->getQuery()
+            ->getResult();
     }
-//    /**
-//     * @return Pyramid[] Returns an array of Pyramid objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Pyramid[] Returns an array of Pyramid objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Pyramid
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Pyramid
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
