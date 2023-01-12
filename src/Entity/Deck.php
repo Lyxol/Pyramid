@@ -15,11 +15,12 @@ class Deck
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $IdPyramid = null;
-
     #[ORM\OneToMany(mappedBy: 'deck', targetEntity: Card::class)]
     private Collection $cards;
+
+    #[ORM\OneToOne(inversedBy: 'deck', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Pyramid $pyramid = null;
 
     public function __construct()
     {
@@ -32,24 +33,19 @@ class Deck
         return $this->id;
     }
 
-    public function getIdPyramid(): ?int
-    {
-        return $this->IdPyramid;
-    }
-
-    public function setIdPyramid(int $IdPyramid): self
-    {
-        $this->IdPyramid = $IdPyramid;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Card>
      */
     public function getCards(): Collection
     {
         return $this->cards;
+    }
+
+    public function setCards(array $cards): self
+    {
+        $cards = new ArrayCollection($cards);
+        $this->cards = $cards;
+        return $this;
     }
 
     public function addCard(Card $card): self
@@ -70,6 +66,18 @@ class Deck
                 $card->setDeck(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPyramid(): ?Pyramid
+    {
+        return $this->pyramid;
+    }
+
+    public function setPyramid(Pyramid $pyramid): self
+    {
+        $this->pyramid = $pyramid;
 
         return $this;
     }
