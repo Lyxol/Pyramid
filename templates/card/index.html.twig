@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<td>
-<button>
-<img src="{{asset("img/#{card.img}")}}" alt="">
-</button>
-</td>
+	<div id="card{{card.id}}">
+		<img src="{{asset("img/#{card.img}")}}" alt="">
+	</div>
 {% endblock %}

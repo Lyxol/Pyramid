@@ -9,6 +9,12 @@ services:
 
 ###> symfony/mailer ###
   mailer:
-    image: schickling/mailcatcher
+    image: maildev/maildev
+    volumes:
+      - /home/maildev:/home/maildev:rw
+    environment:
+      - MAILDEV_MAIL_DIRECTORY=/home/maildev
+    networks:
+      - default
     ports: [1025, 1080]
 ###< symfony/mailer ###

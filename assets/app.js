@@ -10,3 +10,6 @@ import './styles/app.scss';
 
 // start the Stimulus application
 import './bootstrap';
+
+import 'htmx.org';
+window.htmx = require('htmx.org')

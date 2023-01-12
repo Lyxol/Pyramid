@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Player;
 use App\Entity\Pyramid;
 use App\Form\PyramidType;
 use App\Repository\PyramidRepository;
+use PhpParser\Node\Expr\Cast\Object_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +42,7 @@ class PyramidController extends AbstractController
             $PyramidTab = null;
         }
         //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
+        $user = new Player($this->getUser());
         $listPyramid = $pyramidRepository->findByAuthor($user->getEmail());
         return $this->render('pyramid/index.html.twig', [
             'username' => $user->getEmail(),
