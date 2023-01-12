@@ -24,11 +24,16 @@ class PyramidController extends AbstractController
             $PyramidTab = [];
             if (!empty($currentPyramid)) {
                 $collection = $currentPyramid[0]->getDeck()->getCards();
-                foreach ($collection as $card) {
-                    dump($collection);
-                }/*
-                $card_list = $currentPyramid[0]->getDeck()->getCards(); 
-                var_dump($card_list);*/
+                $row_tab = [];
+                $iterator = 0;
+                for ($i = 0; $i <= $currentPyramid[0]->getBase(); $i++) {
+                    for ($j = 0; $j < $i; $j++) {
+                        $row_tab[] = $collection[$iterator];
+                        $iterator++;
+                    }
+                    $PyramidTab[] =  $row_tab;
+                    $row_tab = [];
+                }
             }
         } else {
             $currentPyramid  = null;
@@ -40,7 +45,7 @@ class PyramidController extends AbstractController
         return $this->render('pyramid/index.html.twig', [
             'username' => $user->getEmail(),
             'listPyramid' => $listPyramid,
-            'currentPyramid' => $currentPyramid,
+            'currentPyramid' => $currentPyramid[0],
             'PyramidTab' => $PyramidTab
         ]);
     }
