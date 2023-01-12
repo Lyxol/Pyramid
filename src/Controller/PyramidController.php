@@ -26,12 +26,18 @@ class PyramidController extends AbstractController
             $PyramidTab = [];
             if (!empty($currentPyramid)) {
                 $collection = $currentPyramid[0]->getDeck()->getCards();
-                foreach ($collection as $card) {
-                    dump($collection);
-                }/*
-                $card_list = $currentPyramid[0]->getDeck()->getCards(); 
-                var_dump($card_list);*/
+                $row_tab = [];
+                $iterator = 0;
+                for ($i = 0; $i <= $currentPyramid[0]->getBase(); $i++) {
+                    for ($j = 0; $j < $i; $j++) {
+                        $row_tab[] = $collection[$iterator];
+                        $iterator++;
+                    }
+                    $PyramidTab[] =  $row_tab;
+                    $row_tab = [];
+                }
             }
+            $currentPyramid  = $currentPyramid[0];
         } else {
             $currentPyramid  = null;
             $PyramidTab = null;
@@ -54,12 +60,17 @@ class PyramidController extends AbstractController
         $form = $this->createForm(PyramidType::class, $pyramid);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $pyramid = $form->getData();
             $pyramid->setAuthor($user);
+            $pyramid->addPlayer($user);
+
             $deck = $deckManagerService->newDeck($pyramid);
+            $deckManagerService->saveDeck($deck);
+
             $pyramid->setDeck($deck);
             $pyramidRepository->save($pyramid, true);
-            $deckManagerService->saveDeck($deck);
+
             return $this->redirectToRoute('app_pyramid');
         }
         return $this->render('pyramid/new.html.twig', [

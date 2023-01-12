@@ -36,6 +36,7 @@ class DeckManagerService
             $cards->remove($positionCard);
         }
         $deck->setCards($tempCards);
+        return $deck;
     }
 
     public function saveDeck(Deck $deck)

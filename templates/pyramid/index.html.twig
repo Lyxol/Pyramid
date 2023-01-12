@@ -58,9 +58,11 @@
 							<tr>
 								{% for value in row %}
 									<td>
-										<a href='#' hx-target="#card1" hx-get="{{ path('app_card_index',{'id': value }) }}" hx-swap="outerHTML" class="btn btn-primary">
-											*
-										</a>
+										<div id="card{{value.id}}">
+											<a href='#' hx-target="#card{{value.id}}" hx-get="{{ path('app_card_index',{'id': value.id -1}) }}" hx-swap="outerHTML" class="btn btn-primary">
+												*
+											</a>
+										</div>
 									</td>
 								{% endfor %}
 							</tr>
