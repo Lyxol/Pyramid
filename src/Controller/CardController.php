@@ -6,7 +6,6 @@ use App\Entity\Card;
 use App\Form\CardType;
 use App\Repository\CardRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,14 +39,6 @@ class CardController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[Route('/generate', name: 'app_card_generate', methods: ['GET'])]
-    public function generate(CardRepository $cardRepository): Response
-    {
-
-        new JsonResponse(json_encode('true'));
-    }
-
 
     #[Route('/{id}/edit', name: 'app_card_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Card $card, CardRepository $cardRepository): Response

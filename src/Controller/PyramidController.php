@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Pyramid;
+use App\Entity\Player;
 use App\Form\PyramidType;
 use App\Repository\PyramidRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,7 +41,7 @@ class PyramidController extends AbstractController
             $PyramidTab = null;
         }
         //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
+        $user = new Player($this->getUser());
         $listPyramid = $pyramidRepository->findByAuthor($user->getEmail());
         return $this->render('pyramid/index.html.twig', [
             'username' => $user->getEmail(),
@@ -52,12 +53,13 @@ class PyramidController extends AbstractController
     #[Route('/new', name: 'app_pyramid_new')]
     public function new(Request $request, PyramidRepository $pyramidRepository): Response
     {
+        $user = new Player($this->getUser());
         $pyramid = new Pyramid();
         $form = $this->createForm(PyramidType::class, $pyramid);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $pyramid = $form->getData();
-            $pyramid->setAuthor($this->getUser()->getEmail());
+            $pyramid->setAuthor($user->getEmail());
             $pyramidRepository->save($pyramid, true);
             return $this->redirectToRoute('app_pyramid');
         }
@@ -70,12 +72,13 @@ class PyramidController extends AbstractController
     #[Route('/edit', name: 'app_pyramid_edit')]
     public function edit(Request $request, PyramidRepository $pyramidRepository): Response
     {
+        $user = new Player($this->getUser());
         $pyramid = new Pyramid();
         $form = $this->createForm(PyramidType::class, $pyramid);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $pyramid = $form->getData();
-            $pyramid->setAuthor($this->getUser()->getEmail());
+            $pyramid->setAuthor($user->getEmail());
             $pyramidRepository->save($pyramid, true);
             return $this->redirectToRoute('app_pyramid');
         }
