@@ -26,6 +26,9 @@ class Pyramid
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\OneToOne(mappedBy: 'pyramid', cascade: ['persist', 'remove'])]
+    private ?Deck $deck = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,23 @@ class Pyramid
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDeck(): ?Deck
+    {
+        return $this->deck;
+    }
+
+    public function setDeck(Deck $deck): self
+    {
+        // set the owning side of the relation if necessary
+        if ($deck->getPyramid() !== $this) {
+            $deck->setPyramid($this);
+        }
+
+        $this->deck = $deck;
 
         return $this;
     }
