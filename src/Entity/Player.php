@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlayerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -33,6 +35,18 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Pyramid::class, orphanRemoval: true)]
+    private Collection $pyramids_created;
+
+    #[ORM\ManyToMany(targetEntity: Pyramid::class, mappedBy: 'players')]
+    private Collection $pyramids_played;
+
+    public function __construct()
+    {
+        $this->pyramids_created = new ArrayCollection();
+        $this->pyramids_played = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,6 +136,63 @@ class Player implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pyramid>
+     */
+    public function getPyramidsCreated(): Collection
+    {
+        return $this->pyramids_created;
+    }
+
+    public function addPyramidsCreated(Pyramid $pyramidsCreated): self
+    {
+        if (!$this->pyramids_created->contains($pyramidsCreated)) {
+            $this->pyramids_created->add($pyramidsCreated);
+            $pyramidsCreated->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePyramidsCreated(Pyramid $pyramidsCreated): self
+    {
+        if ($this->pyramids_created->removeElement($pyramidsCreated)) {
+            // set the owning side to null (unless already changed)
+            if ($pyramidsCreated->getAuthor() === $this) {
+                $pyramidsCreated->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pyramid>
+     */
+    public function getPyramidsPlayed(): Collection
+    {
+        return $this->pyramids_played;
+    }
+
+    public function addPyramidsPlayed(Pyramid $pyramidsPlayed): self
+    {
+        if (!$this->pyramids_played->contains($pyramidsPlayed)) {
+            $this->pyramids_played->add($pyramidsPlayed);
+            $pyramidsPlayed->addPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePyramidsPlayed(Pyramid $pyramidsPlayed): self
+    {
+        if ($this->pyramids_played->removeElement($pyramidsPlayed)) {
+            $pyramidsPlayed->removePlayer($this);
+        }
 
         return $this;
     }

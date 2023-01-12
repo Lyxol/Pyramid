@@ -20,9 +20,6 @@ class Card
     #[ORM\Column(length: 255)]
     private ?string $value = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $position = [];
-
     #[ORM\Column(length: 255)]
     private ?string $img = null;
 
@@ -70,18 +67,6 @@ class Card
     public function setValue(string $value): self
     {
         $this->value = $value;
-
-        return $this;
-    }
-
-    public function getPosition(): array
-    {
-        return $this->position;
-    }
-
-    public function setPosition(?array $position): self
-    {
-        $this->position = $position;
 
         return $this;
     }

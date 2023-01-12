@@ -64,7 +64,6 @@ protected function execute(InputInterface $input, OutputInterface $output): int
                     break;
             }
             $card->setValue($j);
-            $card->setPosition([]);
             $id++;
             $cardRepository->save($card);
         }

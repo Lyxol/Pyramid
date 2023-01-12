@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Player;
 use App\Entity\Pyramid;
-use App\Entity\Player;
 use App\Form\PyramidType;
 use App\Repository\PyramidRepository;
 use PhpParser\Node\Expr\Cast\Object_;
@@ -55,13 +54,13 @@ class PyramidController extends AbstractController
     #[Route('/new', name: 'app_pyramid_new')]
     public function new(Request $request, PyramidRepository $pyramidRepository): Response
     {
-        $user = new Player($this->getUser());
+        $user = $this->getUser();
         $pyramid = new Pyramid();
         $form = $this->createForm(PyramidType::class, $pyramid);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $pyramid = $form->getData();
-            $pyramid->setAuthor($user->getEmail());
+            $pyramid->setAuthor($user);
             $pyramidRepository->save($pyramid, true);
             return $this->redirectToRoute('app_pyramid');
         }
