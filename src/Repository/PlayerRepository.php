@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Player;
+use App\Entity\Pyramid;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -62,28 +63,15 @@ class PlayerRepository extends ServiceEntityRepository implements PasswordUpgrad
             ->getOneOrNullResult(); 
     }
 
-//    /**
-//     * @return Player[] Returns an array of Player objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findAllPlayerNameByPyramid(Pyramid $pyramid): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.name')
+            ->andWhere('p.pyramids_played = :pyramid')
+            ->setParameter('pyramid', $pyramid)
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Player
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

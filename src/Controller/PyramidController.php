@@ -6,6 +6,7 @@ use App\Entity\Player;
 use App\Entity\Pyramid;
 use App\Form\PyramidType;
 use App\Repository\PyramidRepository;
+use App\service\PyramidManagerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,11 +17,12 @@ use App\service\DeckManagerService;
 class PyramidController extends AbstractController
 {
     #[Route('/', name: 'app_pyramid')]
-    public function index(PyramidRepository $pyramidRepository, Request $request): Response
+    public function index(PyramidRepository $pyramidRepository,PyramidManagerService $managerService, Request $request): Response
     {
         $id = $request->query->get('id');
         if (!is_null($id)) {
             $currentPyramid = $pyramidRepository->findById($id);
+            $managerService->gameRound($currentPyramid[0]);
             $PyramidTab = [];
             if (!empty($currentPyramid)) {
                 $collection = $currentPyramid[0]->getDeck()->getCards();

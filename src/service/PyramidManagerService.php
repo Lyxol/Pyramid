@@ -2,28 +2,41 @@
 
 namespace App\service;
 
+use App\Entity\Player;
+use App\Entity\Pyramid;
+use App\Repository\PlayerRepository;
+
 class PyramidManagerService
 {
 
-    public function gameRound(){
-        $numligne = 0;
-        $namecard = returnCardInit();
+    public function __construct(private PlayerRepository $playerRepository)
+    {
+    }
+
+    public function gameRound(Pyramid $pyramid){
+        $nbRound = 1;
+        $numLine = 1;
+        $nameCard = returnCardInit();
         $changePlayerTurn = false;
         while(!$changePlayerTurn) {
-            $number = substr($namecard, -6, 2);
+            $number = substr($nameCard, -6, 2);
             if ($number > 10) {
-                echo("boire " . $numligne . "gorger");
+                echo("boire " . $numLine . "gorger");
                 $changePlayerTurn=true;
-                //TODO change name in dynamic
-                $this->playerChange("Alexis");
+                $this->playerChange($pyramid,$nbRound);
             } else {
                 returnCard();
-                $numligne++;
+                $numLine++;
             }
+            $nbRound++;
         }
     }
-    public function playerChange(string $nameOtherPlayers){
-        echo ("Changement de joueur : \nC'est au tour de ".$nameOtherPlayers.".");
+
+    public function playerChange(Pyramid $pyramid, int $p){
+
+        $Nameplayer = $this->playerRepository->findAllPlayerNameByPyramid($pyramid);
+        $name = $Nameplayer[$p];
+        echo ("Changement de joueur : \nC'est au tour de ".$name.".");
     }
 
 
