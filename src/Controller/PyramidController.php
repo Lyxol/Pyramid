@@ -35,6 +35,7 @@ class PyramidController extends AbstractController
                     $row_tab = [];
                 }
             }
+            $currentPyramid  = $currentPyramid[0];
         } else {
             $currentPyramid  = null;
             $PyramidTab = null;
@@ -45,7 +46,7 @@ class PyramidController extends AbstractController
         return $this->render('pyramid/index.html.twig', [
             'username' => $user->getEmail(),
             'listPyramid' => $listPyramid,
-            'currentPyramid' => $currentPyramid[0],
+            'currentPyramid' => $currentPyramid,
             'PyramidTab' => $PyramidTab
         ]);
     }
@@ -57,12 +58,17 @@ class PyramidController extends AbstractController
         $form = $this->createForm(PyramidType::class, $pyramid);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $pyramid = $form->getData();
             $pyramid->setAuthor($user);
+            $pyramid->addPlayer($user);
+
             $deck = $deckManagerService->newDeck($pyramid);
+            $deckManagerService->saveDeck($deck);
+
             $pyramid->setDeck($deck);
             $pyramidRepository->save($pyramid, true);
-            $deckManagerService->saveDeck($deck);
+
             return $this->redirectToRoute('app_pyramid');
         }
         return $this->render('pyramid/new.html.twig', [
