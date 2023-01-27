@@ -16,7 +16,8 @@ class PyramidManagerService
     public function gameRound(Pyramid $pyramid){
         $nbRound = 1;
         $numLine = 1;
-        $nameCard = returnCardInit();
+        //$nameCard = returnCardInit();
+        $nameCard = "T_01.jpg";
         $changePlayerTurn = false;
         while(!$changePlayerTurn) {
             $number = substr($nameCard, -6, 2);
@@ -25,7 +26,7 @@ class PyramidManagerService
                 $changePlayerTurn=true;
                 $this->playerChange($pyramid,$nbRound);
             } else {
-                returnCard();
+                //returnCard();
                 $numLine++;
             }
             $nbRound++;
