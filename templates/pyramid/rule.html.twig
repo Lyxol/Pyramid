@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Tipsy Pyramid - Play!
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="row">
+            <div class="col-sm-2 text-center text-light" style="background:black;min-height:100vh;">
+                <h1 class="text-center mb-3">
+                    Tipsy Pyramid
+                </h1>
+            </div>
+
+            <div class="col-sm-10">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ path('pyramid') }}">
+                                        Play
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/logout">log-out</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{{ path('rule') }}">Règles du jeu</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <ul>
+                    <li>
+                        Les règles du jeu sont simples réussies à gravir la pyramide en retournant une carte par étage.
+                    </li>
+                    <li>
+                        Dans un premier temps, crée la pyramide.
+                    </li>
+                    <li>
+                        Deuxième étape, désigner qui commence.
+                    </li>
+                    <li>
+                        Puis nous atteignions la phase du jeu :
+
+                    </li>
+                    <li>
+                        le joueur choit une carte sur le socle de la pyramide.
+                    </li>
+                    <li>
+                        Si la carte n'est pas une tête alors il continue à monter dans la pyramide.
+                    </li>
+                    <li>
+                        Sinon celle-ci est un habiller alors il prend autant de gorgé que le nombre de ligne qu'il a réussi à parcourir par défaut la ligne 1 (le socle correspond à une gorgée.).
+                    </li>
+                    <li>
+                        Le gagnant est celui qui arrive à gravir toute la pyramide.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+{% endblock %}

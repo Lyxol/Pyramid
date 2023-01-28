@@ -22,7 +22,7 @@ class PyramidController extends AbstractController
         $id = $request->query->get('id');
         if (!is_null($id)) {
             $currentPyramid = $pyramidRepository->findById($id);
-            $managerService->gameRound($currentPyramid[0]);
+            //$managerService->gameRound($currentPyramid[0]);
             $PyramidTab = [];
             if (!empty($currentPyramid)) {
                 $collection = $currentPyramid[0]->getDeck()->getCards();
@@ -106,4 +106,10 @@ class PyramidController extends AbstractController
             $pyramidRepository->remove($pyramid, true);
         }
     }
+    #[Route('/rule',name: 'rule')]
+    public function  rule(){
+        return $this->render('pyramid/rule.html.twig');
+    }
+
+
 }
